@@ -5,7 +5,7 @@ import collections
 import copy
 
 def readNetwork(network):
-    removedFile = 'E:\\mestrado\\python\\colapso\\networks\\removed\\removed' 
+    path = 'E:\\mestrado\\redesII\\1to1000\\metodoIRemoved\\' 
     G = nx.read_gml(network)
     c = collections.Counter()
     for node in G.nodes:
@@ -21,15 +21,8 @@ def readNetwork(network):
       densityWithout = density/networkDensity
       if (1 - round(densityWithout,4)) >= 0.014:    
           GRemoved.remove_node(str(n))
-      nx.write_gml(GRemoved,'{0}_{1}.gml'.format(removedFile,n))    
+      nx.write_gml(GRemoved,'{}vertice_{}_removido_{}_{}.gml'.format(path,n,len(GRemoved.nodes()),len(GRemoved.edges())))    
 
-file = 'E:\\mestrado\\python\\colapso\\networks\\metodoIOriginal.gml' 
+file = 'E:\\mestrado\\redesII\\1to1000\\00_864_19.gml' 
 readNetwork(file)
-files = os.listdir('E:\\mestrado\\python\\colapso\\networks\\removed\\removed\\')
-for f in files:
-    if f.endswith('.gml'):
-        G = nx.read_gml(f)
-        subs[i].plot(xRemovedAux,yRemovedAux,label=qtdNetworks)    
-        subs[i].legend(loc='best')            
-        fig.savefig('/home/juca/Documentos/10000to100000/networks10000to100000.png'.format(str(qtdNetworks)))
 
