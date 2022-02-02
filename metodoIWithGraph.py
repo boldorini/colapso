@@ -1,28 +1,37 @@
-import os
 import networkx as nx
-#import matplotlib.pyplot as plt
-import collections
 import copy
 
-def readNetwork(network):
-    path = 'E:\\mestrado\\redesII\\1to1000\\metodoIRemoved\\' 
+def readNetwork(path,file):    
+    network = path + file
     G = nx.read_gml(network)
-    c = collections.Counter()
-    for node in G.nodes:
-      c[G.degree(node)] += 1
     GRemoved = nx.read_gml(network)
     networkDensity = nx.density(G)
     nodesOfG = len(nx.nodes(G))
-    possibleLinks = (nodesOfG * (nodesOfG - 1)) / 2    
+    possibleLinks = (nodesOfG * (nodesOfG - 1)) / 2     
     for n in G.nodes():
       GDensity = copy.deepcopy(G)
       GDensity.remove_node(str(n))
       density = len(nx.edges(GDensity))/possibleLinks
-      densityWithout = density/networkDensity
-      if (1 - round(densityWithout,4)) >= 0.014:    
+      iota = density/networkDensity
+      #print('{}/{} = {} | iota = {}/{} = 1 - {} = {}'.format(len(nx.edges(GDensity)), possibleLinks, density, networkDensity, density, iota, 1 - iota))
+      if (1 - round(iota,4)) >= 0.0014:
           GRemoved.remove_node(str(n))
-      nx.write_gml(GRemoved,'{}vertice_{}_removido_{}_{}.gml'.format(path,n,len(GRemoved.nodes()),len(GRemoved.edges())))    
+    nx.write_gml(GRemoved,'{}00_removed_{}_{}.gml'.format(path,len(GRemoved.nodes()),len(GRemoved.edges())))    
+    
 
-file = 'E:\\mestrado\\redesII\\1to1000\\00_864_19.gml' 
-readNetwork(file)
+# path = 'E:\\mestrado\\redesII\\1to1000\\'
+# file = '00_864_19.gml' 
+# readNetwork(path,file)
+
+path = 'E:\\mestrado\\redesII\\1000to10000\\'
+file = '00_6047_32.gml'
+readNetwork(path,file)
+
+# path = 'E:\\mestrado\\redesII\\10000to100000\\' 
+# file = '00_10315_14.gml'
+# readNetwork(file)
+
+# path = 'E:\\mestrado\\redesII\\100000to1000000\\' 
+# file = '00_559585_2.gml' 
+# readNetwork(file)
 
