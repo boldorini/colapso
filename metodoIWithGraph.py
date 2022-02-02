@@ -23,13 +23,13 @@ def readNetwork(path,file):
 # file = '00_864_19.gml' 
 # readNetwork(path,file)
 
-path = 'E:\\mestrado\\redesII\\1000to10000\\'
-file = '00_6047_32.gml'
-readNetwork(path,file)
+# path = 'E:\\mestrado\\redesII\\1000to10000\\'
+# file = '00_6047_32.gml'
+# readNetwork(path,file)
 
-# path = 'E:\\mestrado\\redesII\\10000to100000\\' 
-# file = '00_10315_14.gml'
-# readNetwork(file)
+path = 'E:\\mestrado\\redesII\\10000to100000\\' 
+file = '00_10315_14.gml'
+readNetwork(path,file)
 
 # path = 'E:\\mestrado\\redesII\\100000to1000000\\' 
 # file = '00_559585_2.gml' 
