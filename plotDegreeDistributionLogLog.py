@@ -29,16 +29,19 @@ def processNetwork(file, log):
     plt.show()
 
 
-log = False
+log = True
 
-file = 'E:\\mestrado\\redesII\\1to1000\\00_864_19.gml'
+# file = 'E:\\mestrado\\redesII\\1to1000\\00_864_19.gml'
+# processNetwork(file,log)
+
+file = 'E:\\mestrado\\redesII\\1000to10000\\00_6047_192480.gml'
 processNetwork(file,log)
 
-file = 'E:\\mestrado\\redesII\\1000to10000\\00_6047_32.gml'
+file = 'E:\\mestrado\\redesII\\1000to10000\\00_6029_181592_removed_metodoII.gml'
 processNetwork(file,log)
 
-file = 'E:\\mestrado\\redesII\\10000to100000\\00_10315_14.gml'
-processNetwork(file,log)
+# file = 'E:\\mestrado\\redesII\\10000to100000\\00_10315_14.gml'
+# processNetwork(file,log)
 
-file = 'E:\\mestrado\\redesII\\100000to1000000\\00_559585_2.gml'
-processNetwork(file,log)
+# file = 'E:\\mestrado\\redesII\\100000to1000000\\00_559585_2.gml'
+# processNetwork(file,log)
