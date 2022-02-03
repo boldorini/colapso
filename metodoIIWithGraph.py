@@ -1,35 +1,38 @@
 import os
 import networkx as nx
-#import matplotlib.pyplot as plt
-import collections
 import copy
 
-def readNetwork(network):
-    removedFile = 'E:\\mestrado\\python\\colapso\\networks\\removed\\removed' 
+def readNetwork(path,file):
+    
+    network = path + file
     G = nx.read_gml(network)
-    c = collections.Counter()
-    for node in G.nodes:
-      c[G.degree(node)] += 1
-    GRemoved = nx.read_gml(network)
-    networkDensity = nx.density(G)
-    nodesOfG = len(nx.nodes(G))
-    possibleLinks = (nodesOfG * (nodesOfG - 1)) / 2    
-    for n in G.nodes():
-      GDensity = copy.deepcopy(G)
-      GDensity.remove_node(str(n))
-      density = len(nx.edges(GDensity))/possibleLinks
-      densityWithout = density/networkDensity
-      if (1 - round(densityWithout,4)) >= 0.014:    
-          GRemoved.remove_node(str(n))
-      nx.write_gml(GRemoved,'{0}_{1}.gml'.format(removedFile,n))    
+    GRemoved = copy.deepcopy(G)
+    biggestDegree = 0
+    for node in G.nodes():
+      if G.degree(node) > biggestDegree:
+        biggestDegree = G.degree(node)
+    
+    degreeToRemove = biggestDegree - (biggestDegree * 0.3)
+            #medidaPareto
+                    
+    for node in G.nodes():
+      if G.degree(node) >= degreeToRemove:
+          GRemoved.remove_node(node)
+    nx.write_gml(GRemoved,'{}00_{}_{}_removed_metodoII.gml'.format(path,len(GRemoved.nodes()),len(GRemoved.edges())))    
+    
 
-file = 'E:\\mestrado\\python\\colapso\\networks\\metodoIOriginal.gml' 
-readNetwork(file)
-files = os.listdir('E:\\mestrado\\python\\colapso\\networks\\removed\\removed\\')
-for f in files:
-    if f.endswith('.gml'):
-        G = nx.read_gml(f)
-        subs[i].plot(xRemovedAux,yRemovedAux,label=qtdNetworks)    
-        subs[i].legend(loc='best')            
-        fig.savefig('/home/juca/Documentos/10000to100000/networks10000to100000.png'.format(str(qtdNetworks)))
+# path = 'E:\\mestrado\\redesII\\1to1000\\'
+# file = '00_864_19.gml' 
+# readNetwork(path,file)
 
+path = 'E:\\mestrado\\redesII\\1000to10000\\'
+file = '00_6047_192480.gml'
+readNetwork(path,file)
+
+# path = 'E:\\mestrado\\redesII\\10000to100000\\' 
+# file = '00_10315_14.gml'
+# readNetwork(path,file)
+
+# path = 'E:\\mestrado\\redesII\\100000to1000000\\' 
+# file = '00_559585_2.gml' 
+# readNetwork(path, file)
