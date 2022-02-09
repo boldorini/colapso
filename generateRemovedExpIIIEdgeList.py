@@ -2,8 +2,8 @@ import networkx as nx
 
 def readNetwork(path,file):    
     network = path + file
-    G           = nx.read_gml(network)
-    GRemoved    = nx.read_gml(network)        
+    G           = nx.read_edgelist(network)
+    GRemoved    = nx.read_edgelist(network)        
     lowestDegree = 10000000000000
     for node in G.nodes():
       if G.degree(node) < lowestDegree:
@@ -19,7 +19,7 @@ def readNetwork(path,file):
     for node in G.nodes():
       if G.degree(node) >= degreeToRemove:
           GRemoved.remove_node(node)
-    nx.write_gml(GRemoved,'{}00_{}_{}_removed_metodoIII.gml'.format(path,len(GRemoved.nodes()),len(GRemoved.edges())))    
+    nx.write_edgelist(GRemoved,'{}00_{}_{}_removed_metodoIII.txt'.format(path,len(GRemoved.nodes()),len(GRemoved.edges())))    
     
 
 # path = 'E:\\mestrado\\redesII\\1to1000\\'
@@ -30,7 +30,7 @@ def readNetwork(path,file):
 # file = '00_6047_192480.gml'
 # readNetwork(path,file)
 
-path = 'G:\\Meu Drive\\Mestrado\\defesa\\método II\\''
+path = 'G:\\Meu Drive\\Mestrado\\defesa\\método II\\'
 file = 'CE-CX.txt'
 readNetwork(path,file)
 
